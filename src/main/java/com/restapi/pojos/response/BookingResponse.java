@@ -1,4 +1,4 @@
-package com.restapi.pojos;
+package com.restapi.pojos.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

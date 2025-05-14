@@ -1,4 +1,4 @@
-package com.restapi.tests.base;
+package com.restapi.base;
 
 public class BaseTest {
     //CommonTo All testcase
