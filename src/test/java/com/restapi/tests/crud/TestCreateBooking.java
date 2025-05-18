@@ -18,7 +18,8 @@ public class TestCreateBooking extends BaseTest {
 //setup and making a request
         requestSpecification.basePath(APIConstants.CREATE_UPDATE_BOOKING_URL);
         response = RestAssured.given(requestSpecification).when().body(payloadManager.createPayloadBookingAsString()).log().all().post();
-//Extraction
+        System.out.println(response.asString());
+        //Extraction
         BookingResponse bookingResponse = payloadManager.bookingResponseJava(response.asString());
 //verification Part
         assertActions.verifyStringKeyNotNull(bookingResponse.getBookingid());
@@ -28,9 +29,18 @@ public class TestCreateBooking extends BaseTest {
 
     @Test(groups = "reg", priority = 1)
     @Owner("Biju")
-    @Description("TC#INT1 - Step 1. verify that the Booking can not created(when payload is wrong)")
+    @Description("TC#INT1 - Step 1. verify that the Booking can not created(when payload is null)")
     public void testCreateBookingPOST_Negative(){
-        System.out.println("Test Create Booking");
+
+//setup and making a request
+        requestSpecification.basePath(APIConstants.CREATE_UPDATE_BOOKING_URL);
+        response = RestAssured.given(requestSpecification).when().body("{}").log().all().post();
+        System.out.println(response.asString());
+        //Extraction
+
+
+        validatableResponse = response.then().log().all();
+        validatableResponse.statusCode(500);
     }
 
 }
