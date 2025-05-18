@@ -2,6 +2,7 @@ package com.restapi.modules;
 
 //import com.restapi.pojo.request.Booking;
 
+import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.restapi.pojos.request.Auth;
 import com.restapi.pojos.request.Booking;
@@ -12,6 +13,7 @@ import com.restapi.pojos.response.TokenResponse;
 public class PayloadManager {
 
     Gson gson;
+    Faker faker;
 
     public String createPayloadBookingAsString() {
         Booking booking = new Booking();
@@ -61,6 +63,32 @@ public class PayloadManager {
         gson = new Gson();
         TokenResponse tokenResponse1 = gson.fromJson(tokenResponse, TokenResponse.class);
         return tokenResponse1.getToken();
+    }
+
+
+    public String createPayloadBookingFakerJS() {
+        faker = new Faker();
+        Booking booking = new Booking();
+        booking.setFirstname(faker.name().firstName());
+        booking.setLastname(faker.name().lastName());
+        booking.setTotalprice(faker.random().nextInt(1, 1000));
+        booking.setDepositpaid(faker.random().nextBoolean());
+
+        Bookingdates bookingdates = new Bookingdates();
+        bookingdates.setCheckin("2025-02-01");
+        bookingdates.setCheckout("2025-02-02");
+        booking.setBookingdates(bookingdates);
+        booking.setAdditionalneeds("Breakfast");
+
+
+        System.out.println(booking);
+
+
+        // Java Object -> JSON
+        Gson gson = new Gson();
+        String jsonStringBooking = gson.toJson(booking);
+        return jsonStringBooking;
+
     }
 }
 

@@ -1,5 +1,6 @@
 package com.restapi.tests.crud;
 
+import org.json.JSONObject;
 import com.restapi.base.BaseTest;
 import com.restapi.endpoint.APIConstants;
 import com.restapi.modules.PayloadManager;
@@ -43,4 +44,20 @@ public class TestCreateBooking extends BaseTest {
         validatableResponse.statusCode(500);
     }
 
+
+    @Test(groups = "reg", priority = 1)
+    @Owner("Biju")
+    @Description("TC#2 - Step 1. verify that the Booking can  created(when payload is RANDOM)")
+    public void testCreateBookingPOST_Positive_RANDOM_DATA(){
+
+//setup and making a request
+        requestSpecification.basePath(APIConstants.CREATE_UPDATE_BOOKING_URL);
+        response = RestAssured.given(requestSpecification).when().body(payloadManager.createPayloadBookingFakerJS()).log().all().post();
+        System.out.println(response.asString());
+        //Extraction
+
+
+        validatableResponse = response.then().log().all();
+        validatableResponse.statusCode(200);
+    }
 }
