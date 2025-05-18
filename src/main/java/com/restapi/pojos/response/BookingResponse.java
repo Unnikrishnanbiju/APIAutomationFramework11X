@@ -2,6 +2,7 @@ package com.restapi.pojos.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.restapi.pojos.request.Booking;
 //import com.restapi.pojos.request.Booking;
 
 public class BookingResponse {
